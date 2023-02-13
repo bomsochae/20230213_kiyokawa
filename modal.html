@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <title>COACHTECH</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <open-component v-on:clicked="openModal"></open-component>
+    <component v-show="showComponent" v-on:clicked="closeModal"></component>
+  </div>
+  <script>
+    Vue.component('open-component', {
+      template: '<button v-on:click="openClicked" class="btn openBtn">開く</button>',
+      methods: {
+        openClicked: function () {
+          this.$emit('clicked');
+        }
+      }
+    }),
+    Vue.component('component', {
+      template: `
+        <div class="modal" v-on:click.self="closeClicked">
+          <div class="modal-content">
+            <div class="modal-content__inner">
+              <p class="modal-content__text">モーダルウィンドウ</p>
+              <button v-on:click="closeClicked" class="btn closeBtn">閉じる</button>
+            </div>
+          </div>
+        </div > 
+      `,
+        methods: {
+        closeClicked: function () {
+          this.$emit('clicked');
+        }
+      }
+    }),
+    new Vue({
+      el: '#app',
+      data: {
+        showComponent: false
+      },
+      methods: {
+        openModal: function () {
+          this.showComponent = true;
+        },
+        closeModal: function () {
+          this.showComponent = false;
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

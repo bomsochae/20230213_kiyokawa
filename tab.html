@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <title>COACHTECH</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <div class="tab">
+      <ul class="tab-menu">
+        <li v-on:click="select('1')" v-bind:class="{'active' : show == '1'}">タブ１</li>
+        <li v-on:click="select('2')" v-bind:class="{'active' : show == '2'}">タブ２</li>
+        <li v-on:click="select('3')" v-bind:class="{'active' : show == '3'}">タブ３</li>
+      </ul>
+      <div class="tab-content">
+        <div v-if="show == '1'" class="tab-content__item">コンテンツ１</div>
+        <div v-else-if="show == '2'" class="tab-content__item">コンテンツ２</div>
+        <div v-else-if="show == '3'" class="tab-content__item">コンテンツ３</div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const vm1 = new Vue({
+      el: '#app',
+      data() {
+        return {
+          show: '1',
+        }
+      },
+      methods: {
+        select: function(num) {
+          this.show = num;
+        }
+      }
+    });
+  </script>
+</body>
+</html>
